@@ -4,6 +4,7 @@ import {
   BRAND_QUERY,
   BRANDS_QUERY,
   DEAL_PRODUCTS,
+  CATEGORY_PRODUCTS,
   GET_ALL_BLOG,
   LATEST_BLOG_QUERY,
   MY_ORDERS_QUERY,
@@ -60,6 +61,16 @@ const getDealProducts = async () => {
     return data ?? [];
   } catch (error) {
     console.log("Error fetching hot deal Products:", error);
+    return [];
+  }
+};
+
+const getCategoryProducts = async (slug: string) => {
+  try {
+    const { data } = await sanityFetch({ query: CATEGORY_PRODUCTS, params: { slug } });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching Category Products:", error);
     return [];
   }
 };
@@ -163,6 +174,7 @@ export {
   getAllBrands,
   getLatestBlogs,
   getDealProducts,
+  getCategoryProducts,
   getProductBySlug,
   getBrand,
   getMyOrders,

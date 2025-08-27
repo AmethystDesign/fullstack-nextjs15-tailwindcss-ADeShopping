@@ -1,40 +1,41 @@
 "use client";
-import { Category, Product } from "@/sanity.types";
+import { Category, CATEGORY_PRODUCTSResult, Product } from "@/sanity.types";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
-import { client } from "@/sanity/lib/client";
+// import { client } from "@/sanity/lib/client";
 import { AnimatePresence, motion } from "motion/react";
 import { Loader2 } from "lucide-react";
 import NoProductAvailable from "./NoProductAvailable";
 import ProductCard from "./ProductCard";
-import { CATEGORY_PRODUCTS } from "@/sanity/queries/query";
+
 interface Props {
   categories: Category[];
   slug: string;
+  products: Product[];
 }
 
-const CategoryProducts = ({ categories, slug }: Props) => {
+const CategoryProducts = ({ categories, slug, products }: Props) => {
   const [currentSlug, setCurrentSlug] = useState(slug);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const handleCategoryChange = (newSlug: string) => {
     if (newSlug === currentSlug) return; // Prevent unnecessary updates
     setCurrentSlug(newSlug);
     router.push(`/category/${newSlug}`, { scroll: false }); // Update URL without
   };
 
+  /* should fetch Sanity data server-side rather than directly from client components. The CORS restriction happens only when the browser calls Sanity’s API directly.
   const fetchProducts = async (categorySlug: string) => {
     setLoading(true);
+    
     try {
       const query = `
         *[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc){
         ...,"categories": categories[]->title}
       `;
-
-      // Comment: issue didn't fixed
-      // const query = CATEGORY_PRODUCTS;  // defined in /sanity/queries/query.ts
 
       const data = await client.fetch(query, { categorySlug });
       setProducts(data);
@@ -45,10 +46,12 @@ const CategoryProducts = ({ categories, slug }: Props) => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchProducts(currentSlug);
   }, [router]);
-
+    */
+  
   return (
     <div className="py-5 flex flex-col md:flex-row items-start gap-5">
       <div className="flex flex-col md:min-w-40 border">
