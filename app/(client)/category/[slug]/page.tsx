@@ -5,7 +5,14 @@ import React from "react";
 import { CATEGORY_PRODUCTS, PRODUCT_CATEGORIES } from "@/sanity/queries/query";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+type CategoryPageProps = {
+  params: {
+    slug: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const slug = params.slug;
 
   // fetch categories + products server-side
