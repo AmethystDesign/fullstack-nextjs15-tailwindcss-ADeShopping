@@ -69,7 +69,7 @@ const OTHERS_BLOG_QUERY = defineQuery(`*[
     name,
     image,
   },
-  categories[]->{
+  blogcategories[]->{
     title,
     "slug": slug.current,
   }

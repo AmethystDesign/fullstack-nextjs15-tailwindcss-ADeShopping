@@ -3,9 +3,10 @@ import ProductCard from "@/components/ProductCard";
 import Title from "@/components/Title";
 import { getDealProducts } from "@/sanity/queries";
 import React from "react";
+import { Product } from "@/sanity.types";
 
 const DealPage = async () => {
-  const products = await getDealProducts();
+  const products: Product[] = await getDealProducts();
   return (
     <div className="py-10 bg-deal-bg">
       <Container>
@@ -13,8 +14,7 @@ const DealPage = async () => {
           Hot Deals of the Week
         </Title>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
-          {/* @ts-expect-error */}
-          {products?.map((product) => (
+          {products?.map((product: any) => (
             <ProductCard key={product?._id} product={product} />
           ))}
         </div>

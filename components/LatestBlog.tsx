@@ -6,9 +6,10 @@ import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import dayjs from "dayjs";
+import { Blog, Blogcategory } from "@/sanity.types";
 
 const LatestBlog = async () => {
-  const blogs = await getLatestBlogs();
+  const blogs: Blog[] = await getLatestBlogs();
   return (
     <div className="mb-10 lg:mb-20">
       <Title>Latest Blog</Title>
@@ -29,14 +30,17 @@ const LatestBlog = async () => {
             <div className="bg-shop_light_bg p-5">
               <div className="text-xs flex items-center gap-5">
                 <div className="flex items-center relative group cursor-pointer">
-                  {blog?.blogcategories?.map((item, index) => (
-                    <p
-                      key={index}
-                      className="font-semibold text-shop_dark_green tracking-wider"
-                    >
-                      {item?.title}
-                    </p>
-                  ))}
+                  {blog?.blogcategories?.map((category, index) => {
+                    const cat = category as { title?: string };
+                    return (
+                      <p
+                        key={index}
+                        className="font-semibold text-shop_dark_green tracking-wider"
+                      >
+                        {cat?.title}
+                      </p>
+                    )
+                  })}
                   <span className="absolute left-0 -bottom-1.5 bg-lightColor/30 inline-block w-full h-[2px] group-hover:bg-shop_dark_green hover:cursor-pointer hoverEffect" />
                 </div>
                 <p className="flex items-center gap-1 text-lightColor relative group hover:cursor-pointer hover:text-shop_dark_green hoverEffect">
