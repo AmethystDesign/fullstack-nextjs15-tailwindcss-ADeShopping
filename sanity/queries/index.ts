@@ -12,8 +12,6 @@ import {
   SINGLE_BLOG_QUERY,
 } from "./query";
 
-import { new_DEAL_PRODUCTSResult, Product } from "@/sanity.types";
-
 const getCategories = async (quantity?: number) => {
   try {
     const query = quantity
