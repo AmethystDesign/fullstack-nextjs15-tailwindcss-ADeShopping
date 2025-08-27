@@ -528,6 +528,17 @@ export type LATEST_BLOG_QUERYResult = Array<{
   }>;
 }>;
 
+export type new_DEAL_PRODUCTSResult = Array<
+  Omit<Product, "categories"> & {
+    categories?: {
+      _id: string;
+      _type: "category";
+      title: string;
+      slug?: { current: string };
+    }[];
+  }
+  >;
+
 // Variable: DEAL_PRODUCTS
 // Query: *[_type == 'product' && status == 'hot'] | order(name asc){    ...,    "categories": categories[]->title  }
 export type DEAL_PRODUCTSResult = Array<{

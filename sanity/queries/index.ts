@@ -12,7 +12,7 @@ import {
   SINGLE_BLOG_QUERY,
 } from "./query";
 
-import { Product } from "@/sanity.types";
+import { new_DEAL_PRODUCTSResult, Product } from "@/sanity.types";
 
 const getCategories = async (quantity?: number) => {
   try {
@@ -57,6 +57,16 @@ const getLatestBlogs = async () => {
 };
 
 const getDealProducts = async () => {
+  try {
+    const { data } = await sanityFetch({ query: DEAL_PRODUCTS });
+    return data ?? [];
+  } catch (error) {
+    console.log("Error fetching hot deal Products:", error);
+    return [];
+  }
+};
+
+const getDealProducts_new = async () => {
   try {
     const { data } = await sanityFetch({ query: DEAL_PRODUCTS });
     return data ?? [];
