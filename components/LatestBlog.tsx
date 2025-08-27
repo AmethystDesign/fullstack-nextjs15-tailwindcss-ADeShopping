@@ -6,10 +6,10 @@ import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import dayjs from "dayjs";
-import { Blog, Blogcategory } from "@/sanity.types";
+import { Blog, LATEST_BLOG_QUERYResult } from "@/sanity.types";
 
 const LatestBlog = async () => {
-  const blogs: Blog[] = await getLatestBlogs();
+  const blogs: LATEST_BLOG_QUERYResult= await getLatestBlogs();
   return (
     <div className="mb-10 lg:mb-20">
       <Title>Latest Blog</Title>

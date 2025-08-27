@@ -28,12 +28,13 @@ const CategoryProducts = ({ categories, slug }: Props) => {
   const fetchProducts = async (categorySlug: string) => {
     setLoading(true);
     try {
-      // const query = `
-      //   *[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc){
-      //   ...,"categories": categories[]->title}
-      // `;
+      const query = `
+        *[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc){
+        ...,"categories": categories[]->title}
+      `;
 
-      const query = CATEGORY_PRODUCTS;  // defined in /sanity/queries/query.ts
+      // Comment: issue didn't fixed
+      // const query = CATEGORY_PRODUCTS;  // defined in /sanity/queries/query.ts
 
       const data = await client.fetch(query, { categorySlug });
       setProducts(data);

@@ -299,6 +299,7 @@ export type Category = {
   description?: string;
   range?: number;
   featured?: boolean;
+  productCount?: number;
   image?: {
     asset?: {
       _ref: string;
@@ -432,7 +433,9 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes = Address | Blogcategory | Blog | Author | Order | Product | Brand | BlockContent | Category | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: ./sanity/queries/query.ts
 // Variable: BRANDS_QUERY
 // Query: *[_type=='brand'] | order(title asc)
@@ -458,6 +461,7 @@ export type BRANDS_QUERYResult = Array<{
     _type: "image";
   };
 }>;
+
 // Variable: LATEST_BLOG_QUERY
 // Query: *[_type == 'blog' && isLatest == true]|order(publishedAt, desc){      ...,      blogcategories[]->{        title      }    }
 export type LATEST_BLOG_QUERYResult = Array<{
@@ -523,6 +527,7 @@ export type LATEST_BLOG_QUERYResult = Array<{
     _key: string;
   }>;
 }>;
+
 // Variable: DEAL_PRODUCTS
 // Query: *[_type == 'product' && status == 'hot'] | order(name asc){    ...,    "categories": categories[]->title  }
 export type DEAL_PRODUCTSResult = Array<{
@@ -561,6 +566,7 @@ export type DEAL_PRODUCTSResult = Array<{
   variant?: "appliances" | "gadget" | "others" | "refrigerators";
   isFeatured?: boolean;
 }>;
+
 // Variable: PRODUCT_BY_SLUG_QUERY
 // Query: *[_type == "product" && slug.current == $slug] | order(name asc) [0]
 export type PRODUCT_BY_SLUG_QUERYResult = {
@@ -605,11 +611,13 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
   variant?: "appliances" | "gadget" | "others" | "refrigerators";
   isFeatured?: boolean;
 } | null;
+
 // Variable: BRAND_QUERY
 // Query: *[_type == "product" && slug.current == $slug]{  "brandName": brand->title  }
 export type BRAND_QUERYResult = Array<{
   brandName: string | null;
 }>;
+
 // Variable: MY_ORDERS_QUERY
 // Query: *[_type == 'order' && clerkUserId == $userId] | order(orderData desc){    ...,    products[]{      ...,product->    }  }
 export type MY_ORDERS_QUERYResult = Array<{
@@ -689,6 +697,7 @@ export type MY_ORDERS_QUERYResult = Array<{
   status?: "cancelled" | "delivered" | "out_for_delivery" | "paid" | "pending" | "processing" | "shipped";
   orderDate?: string;
 }>;
+
 // Variable: GET_ALL_BLOG
 // Query: *[_type == 'blog'] | order(publishedAt desc)[0...$quantity]{  ...,      blogcategories[]->{      title    }  }
 export type GET_ALL_BLOGResult = Array<{
@@ -754,6 +763,7 @@ export type GET_ALL_BLOGResult = Array<{
     _key: string;
   }>;
 }>;
+
 // Variable: SINGLE_BLOG_QUERY
 // Query: *[_type == "blog" && slug.current == $slug][0]{  ...,     author->{    name,    image,  },  blogcategories[]->{    title,    "slug": slug.current,  },}
 export type SINGLE_BLOG_QUERYResult = {
@@ -829,6 +839,7 @@ export type SINGLE_BLOG_QUERYResult = {
     _key: string;
   }>;
 } | null;
+
 // Variable: BLOG_CATEGORIES
 // Query: *[_type == "blog"]{     blogcategories[]->{    ...    }  }
 export type BLOG_CATEGORIESResult = Array<{
@@ -843,6 +854,7 @@ export type BLOG_CATEGORIESResult = Array<{
     description?: string;
   }> | null;
 }>;
+
 // Variable: OTHERS_BLOG_QUERY
 // Query: *[  _type == "blog"  && defined(slug.current)  && slug.current != $slug]|order(publishedAt desc)[0...$quantity]{...  publishedAt,  title,  mainImage,  slug,  author->{    name,    image,  },  blogcategories[]->{    title,    "slug": slug.current,  }}
 export type OTHERS_BLOG_QUERYResult = Array<{
@@ -880,6 +892,7 @@ export type OTHERS_BLOG_QUERYResult = Array<{
     slug: string | null;
   }> | null;
 }>;
+
 // Variable: CATEGORY_PRODUCTS
 // Query: *[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc){        ...,"categories": categories[]->title}
 export type CATEGORY_PRODUCTSResult = Array<{
