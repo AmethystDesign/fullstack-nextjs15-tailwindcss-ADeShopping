@@ -66,16 +66,6 @@ const getDealProducts = async () => {
   }
 };
 
-const getDealProducts_new = async () => {
-  try {
-    const { data } = await sanityFetch({ query: DEAL_PRODUCTS });
-    return data ?? [];
-  } catch (error) {
-    console.log("Error fetching hot deal Products:", error);
-    return [];
-  }
-};
-
 const getProductBySlug = async (slug: string) => {
   try {
     const product = await sanityFetch({
