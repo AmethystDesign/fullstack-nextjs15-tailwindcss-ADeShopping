@@ -59,7 +59,7 @@ const getDealProducts = async () => {
     const { data } = await sanityFetch({ query: DEAL_PRODUCTS });
     return data ?? [];
   } catch (error) {
-    console.log("Error fetching deal Products:", error);
+    console.log("Error fetching hot deal Products:", error);
     return [];
   }
 };
@@ -89,7 +89,7 @@ const getBrand = async (slug: string) => {
     });
     return product?.data || null;
   } catch (error) {
-    console.error("Error fetching product by ID:", error);
+    console.error("Error fetching brand by ID:", error);
     return null;
   }
 };
@@ -102,7 +102,7 @@ const getMyOrders = async (userId: string) => {
     });
     return orders?.data || null;
   } catch (error) {
-    console.error("Error fetching product by ID:", error);
+    console.error("Error fetching orders by user ID:", error);
     return null;
   }
 };
@@ -115,7 +115,7 @@ const getAllBlogs = async (quantity: number) => {
     });
     return data ?? [];
   } catch (error) {
-    console.log("Error fetching all brands:", error);
+    console.log("Error fetching all blogs:", error);
     return [];
   }
 };
@@ -128,7 +128,7 @@ const getSingleBlog = async (slug: string) => {
     });
     return data ?? [];
   } catch (error) {
-    console.log("Error fetching all brands:", error);
+    console.log("Error fetching brand by ID:", error);
     return [];
   }
 };
@@ -140,7 +140,7 @@ const getBlogCategories = async () => {
     });
     return data ?? [];
   } catch (error) {
-    console.log("Error fetching all brands:", error);
+    console.log("Error fetching all blog categories:", error);
     return [];
   }
 };
@@ -153,7 +153,7 @@ const getOthersBlog = async (slug: string, quantity: number) => {
     });
     return data ?? [];
   } catch (error) {
-    console.log("Error fetching all brands:", error);
+    console.log("Error fetching other blogs:", error);
     return [];
   }
 };

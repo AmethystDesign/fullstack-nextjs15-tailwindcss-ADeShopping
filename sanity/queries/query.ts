@@ -38,16 +38,16 @@ const GET_ALL_BLOG = defineQuery(`*[_type == 'blog'] | order(publishedAt desc)[0
 
 const SINGLE_BLOG_QUERY =
   defineQuery(`*[_type == "blog" && slug.current == $slug][0]{
-  ..., 
-    author->{
-    name,
-    image,
-  },
-  blogcategories[]->{
-    title,
-    "slug": slug.current,
-  },
-}`);
+      ..., 
+      author->{
+      name,
+      image,
+    },
+    blogcategories[]->{
+      title,
+      "slug": slug.current,
+    },
+  }`);
 
 const BLOG_CATEGORIES = defineQuery(`*[_type == "blog"]{
      blogcategories[]->{

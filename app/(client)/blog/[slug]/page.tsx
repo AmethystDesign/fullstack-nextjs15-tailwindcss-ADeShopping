@@ -1,6 +1,9 @@
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import { SINGLE_BLOG_QUERYResult, Blog } from "@/sanity.types";
+import {
+  SINGLE_BLOG_QUERYResult,
+  OTHERS_BLOG_QUERYResult,
+} from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import {
   getBlogCategories,
@@ -193,7 +196,7 @@ const SingleBlogPage = async ({
 
 const BlogLeft = async ({ slug }: { slug: string }) => {
   const categories = await getBlogCategories();
-  const blogs: Blog[] = await getOthersBlog(slug, 5);
+  const blogs: OTHERS_BLOG_QUERYResult = await getOthersBlog(slug, 5);
 
   return (
     <div>
@@ -214,7 +217,7 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
       <div className="border border-lightColor p-5 rounded-md mt-10">
         <Title className="text-base">Latest Blogs</Title>
         <div className="space-y-4 mt-4">
-          {blogs?.map((blog: Blog, index: number) => (
+          {blogs?.map((blog, index: number) => (
             <Link
               href={`/blog/${blog?.slug?.current}`}
               key={index}

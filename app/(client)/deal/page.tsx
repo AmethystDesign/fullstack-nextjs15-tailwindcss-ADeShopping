@@ -3,10 +3,10 @@ import ProductCard from "@/components/ProductCard";
 import Title from "@/components/Title";
 import { getDealProducts } from "@/sanity/queries";
 import React from "react";
-import { Product } from "@/sanity.types";
+import { DEAL_PRODUCTSResult } from "@/sanity.types";
 
 const DealPage = async () => {
-  const products: Product[] = await getDealProducts();
+  const products: DEAL_PRODUCTSResult = await getDealProducts();
   return (
     <div className="py-10 bg-deal-bg">
       <Container>
