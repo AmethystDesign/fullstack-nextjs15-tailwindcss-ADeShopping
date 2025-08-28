@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,7 +6,8 @@ import {
   ClerkProvider,
 } from "@clerk/nextjs";
 
-export const metadata: Metadata = {
+// export const metadata: Metadata = {
+export const metadata = {
   title: {
     template: "%s | AD eShopping",
     default: "AD eShopping",

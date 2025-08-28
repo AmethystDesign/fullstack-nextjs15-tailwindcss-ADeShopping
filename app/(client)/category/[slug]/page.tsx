@@ -5,14 +5,17 @@ import React from "react";
 import { CATEGORY_PRODUCTS, PRODUCT_CATEGORIES } from "@/sanity/queries/query";
 import { sanityFetch } from "@/sanity/lib/live";
 
-// ✅ Explicit props for App Router
-interface CategoryPageProps {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+export default async function CategoryPage(props: {
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  // ✅ Await both params and searchParams
+  const [params, searchParams] = await Promise.all([
+    props.params,
+    props.searchParams,
+  ]);
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const slug = params.slug;
+  const { slug } = params;
 
   // fetch categories + products server-side
   const { data: categories } = await sanityFetch({
@@ -37,6 +40,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           categories={categories}
           slug={slug}
           products={products}
+          // searchParams={searchParams || {}}
         />
       </Container>
     </div>

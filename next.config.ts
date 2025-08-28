@@ -1,12 +1,15 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next";
+import path from "path";
 
-const nextConfig: NextConfig = {
+// const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
+        pathname: "/**",
       },
     ],
   },
