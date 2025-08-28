@@ -5,19 +5,15 @@ import { CATEGORY_PRODUCTS, PRODUCT_CATEGORIES } from "@/sanity/queries/query";
 import { sanityFetch } from "@/sanity/lib/live";
 
 export default async function CategoryPage({
-  params,
+  params, // Next.js passes a special async proxy
 }: {
-  params: { slug: string };
-}) {
-  // Await params before destructuring
+  params: Record<string, string>; // ✅ just tell TS it’s a string map
+  }) {
   const resolvedParams = await params;
-  const { slug } = resolvedParams;
+  const slug = resolvedParams.slug;
 
   // fetch categories + products server-side
-  const { data: categories } = await sanityFetch({
-    query: PRODUCT_CATEGORIES,
-  });
-
+  const { data: categories } = await sanityFetch({ query: PRODUCT_CATEGORIES });
   const { data: products } = await sanityFetch({
     query: CATEGORY_PRODUCTS,
     params: { categorySlug: slug },
@@ -36,7 +32,6 @@ export default async function CategoryPage({
           categories={categories}
           slug={slug}
           products={products}
-          // searchParams={searchParams || {}}
         />
       </Container>
     </div>
