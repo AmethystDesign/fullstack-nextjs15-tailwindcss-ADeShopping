@@ -1,21 +1,17 @@
 import CategoryProducts from "@/components/CategoryProducts";
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import React from "react";
 import { CATEGORY_PRODUCTS, PRODUCT_CATEGORIES } from "@/sanity/queries/query";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export default async function CategoryPage(props: {
-  params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+export default async function CategoryPage({
+  params,
+}: {
+  params: { slug: string };
 }) {
-  // ✅ Await both params and searchParams
-  const [params, searchParams] = await Promise.all([
-    props.params,
-    props.searchParams,
-  ]);
-
-  const { slug } = params;
+  // Await params before destructuring
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   // fetch categories + products server-side
   const { data: categories } = await sanityFetch({
