@@ -6,14 +6,12 @@ import { CATEGORY_PRODUCTS, PRODUCT_CATEGORIES } from "@/sanity/queries/query";
 import { sanityFetch } from "@/sanity/lib/live";
 
 type CategoryPageProps = {
-  params: {
-    slug: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: { slug: string }; // ✅ params come from the dynamic segment
+  searchParams?: Record<string, string | string[] | undefined>; // ✅ optional
 };
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const slug = params.slug;
+  const { slug } = params;
 
   // fetch categories + products server-side
   const { data: categories } = await sanityFetch({
